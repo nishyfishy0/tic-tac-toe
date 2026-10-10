@@ -47,28 +47,28 @@ function set(event) {
         turn = "X";
     }
 
-    if (!(button.disabled)) {
-        for (const cond of wins) {
-            var countX = cond.filter(btn => btn.textContent === "X").length;
-            var countO = cond.filter(btn => btn.textContent === "O").length;
-            
+    for (const cond of wins) {
+        var countX = cond.filter(btn => btn.textContent === "X").length;
+        var countO = cond.filter(btn => btn.textContent === "O").length;
+
+        if (button.disabled === false) {
             count += (cond.filter(btn => btn.textContent !== "_").length ? 1 : 0);
-    
-            if (countX === 3) {
-                winner = "X";
-            } else if (countO === 3) {
-                winner = "O";
-            }
         }
-    
-        if (winner !== null) {
-            winText.textContent = `${winner} has won.`;
-        };
         
-        if (count > 50 && winner === null) {
-            winText.textContent = `Draw.`;
-        };
+        if (countX === 3) {
+            winner = "X";
+        } else if (countO === 3) {
+            winner = "O";
+        }
     }
+
+    if (winner !== null) {
+        winText.textContent = `${winner} has won.`;
+    };
+    
+    if (count > 50 && winner === null) {
+        winText.textContent = `Draw.`;
+    };
 }
 
 
