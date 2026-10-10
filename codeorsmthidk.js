@@ -39,8 +39,13 @@ function set(event) {
         const button = event.target;
         button.textContent = turn;
         button.disabled = true;
+        count++;
     }
 
+    if (winner !== null) {
+        return;
+    }
+    
     if (turn === "X") {
         turn = "O";
     } else {
@@ -50,10 +55,6 @@ function set(event) {
     for (const cond of wins) {
         var countX = cond.filter(btn => btn.textContent === "X").length;
         var countO = cond.filter(btn => btn.textContent === "O").length;
-
-        if (button.disabled === false) {
-            count += (cond.filter(btn => btn.textContent !== "_").length ? 1 : 0);
-        }
         
         if (countX === 3) {
             winner = "X";
@@ -66,7 +67,7 @@ function set(event) {
         winText.textContent = `${winner} has won.`;
     };
     
-    if (count > 50 && winner === null) {
+    if (count === 9 && winner === null) {
         winText.textContent = `Draw.`;
     };
 }
